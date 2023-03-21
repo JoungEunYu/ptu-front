@@ -3,6 +3,8 @@ import {createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import CustomersScreen from '../screens/CustomersScreen';
 import OrdersScreen from '../screens/OrdersScreen';
 import { useNavigation } from '@react-navigation/native';
+import { Icon } from '@rneui/themed';
+
 
 export type TabStackParamList = {
   Customers: undefined;
@@ -22,7 +24,29 @@ const Tab = createBottomTabNavigator<TabStackParamList>()
 
  
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions= { ({route}) => ({
+      tabBarActiveTintColor: "#59C1CC",
+      tabBarInactiveTintColor: "gray",
+      tabBarIcon: ({focused, color, size }) => {                // TAB 아이콘 모양, 색 (클릭시, 넌클릭시)
+        if (route.name === 'Customers') {
+          return (
+          <Icon
+            name ="users"
+            type ="entypo"
+            color={focused ? "#59C1CC" : "gray"}
+          />
+          )
+        } else if (route.name ==='Orders') {
+          return(
+          <Icon
+            name ="box"
+            type ="entypo"
+            color={focused ? "#EB6A7C" : "gray"} 
+          />
+          )
+        }
+      } 
+    })}>
       <Tab.Screen name="Customers" component={CustomersScreen} />
       <Tab.Screen name="Orders" component={OrdersScreen} />
     </Tab.Navigator>
