@@ -4,11 +4,15 @@ import CustomersScreen from '../screens/CustomersScreen';
 import OrdersScreen from '../screens/OrdersScreen';
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from '@rneui/themed';
+import BoardScreen from '../screens/BoardScreen';
+import OptionScreen from '../screens/OptionScreen';
 
 
 export type TabStackParamList = {
   Customers: undefined;
   Orders: undefined;
+  Board: undefined;
+  Option: undefined;
 }
 
 const Tab = createBottomTabNavigator<TabStackParamList>()
@@ -45,10 +49,31 @@ const Tab = createBottomTabNavigator<TabStackParamList>()
           />
           )
         }
+          else if (route.name ==='Board') {
+            return(
+            <Icon
+              name ="list"
+              type ="entypo"
+              color={focused ? "#CEF245" : "gray"} 
+            />
+          )
+        }
+          else if (route.name ==='Option') {
+          return(
+          <Icon
+            name ="dots-three-vertical"
+            type ="entypo"
+            color={focused ? "#FA732C" : "gray"} 
+          />
+        )
+      }
+        
       } 
     })}>
       <Tab.Screen name="Customers" component={CustomersScreen} />
       <Tab.Screen name="Orders" component={OrdersScreen} />
+      <Tab.Screen name="Board" component={BoardScreen} />
+      <Tab.Screen name="Option" component={OptionScreen} />
     </Tab.Navigator>
   )
 }
